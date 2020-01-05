@@ -1,0 +1,18 @@
+{
+  "name": "locations_backend",
+  "version": "1.0.0",
+  "description": "Small app for store locations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "locations",
+    "nodejs"
+  ],
+  "author": "Mate Pinter",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
