@@ -14,7 +14,7 @@ module.exports = {
       description: {
         type: Sequelize.TEXT
       },
-      geolocation: {
+      position: {
         type: Sequelize.STRING,
         allowNull: false
       },

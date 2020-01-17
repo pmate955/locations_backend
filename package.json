@@ -4,7 +4,7 @@
   "description": "Small app for store locations",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
     "db:migrate": "sequelize db:migrate --config=./config/database.json",
     "db:migrate:undo": "sequelize db:migrate:undo --config=./config/database.json",
     "db:rebuild": "./bin/db-rebuild"

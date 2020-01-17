@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Location = sequelize.define('Location', {
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
-    geolocation: DataTypes.STRING,
+    position: DataTypes.STRING,
     townId: DataTypes.INTEGER
   }, {});
   Location.associate = function (models) {
