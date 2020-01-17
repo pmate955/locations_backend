@@ -4,7 +4,10 @@
   "description": "Small app for store locations",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js",
+    "db:migrate": "sequelize db:migrate --config=./config/database.json",
+    "db:migrate:undo": "sequelize db:migrate:undo --config=./config/database.json",
+    "db:rebuild": "./bin/db-rebuild"
   },
   "keywords": [
     "locations",
@@ -16,5 +19,8 @@
     "express": "^4.17.1",
     "sequelize": "^5.21.3",
     "sequelize-cli": "^5.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }

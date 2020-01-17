@@ -1,0 +1,8 @@
+rebuild() {
+  NODE_ENV=development ./node_modules/.bin/sequelize db:drop --config config/database.json
+  NODE_ENV=development ./node_modules/.bin/sequelize db:create --config config/database.json
+  NODE_ENV=development ./node_modules/.bin/sequelize db:migrate --config config/database.json
+  NODE_ENV=development ./node_modules/.bin/sequelize db:seed:all --config config/database.json
+}
+
+rebuild
