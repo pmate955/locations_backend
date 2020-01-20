@@ -8,7 +8,8 @@ const appBuilder = () =>
       bodyParser.json(),
       bodyParser.urlencoded({ extended: false })
     );
-    app.use('/towns', require('./routers/towns'));
+    app.use('/towns', require('./routes/towns'));
+    app.use('/users', require('./routes/users'));
     resolve(app);
   });
 
