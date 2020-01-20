@@ -1,9 +1,6 @@
-const express = require('express');
+const appBuilder = require('./app');
+const port = process.env.API_PORT || 3000;
 
-const app = express();
-const port = 3000;
-
-app.use('/towns', require('./app/routers/towns'));
-
-app.listen(port, () => console.log(`App listening on port ${port}!`))
-;
+appBuilder().then(app => {
+  app.listen(port, () => console.log(`App listening on port ${port}!`));
+});
