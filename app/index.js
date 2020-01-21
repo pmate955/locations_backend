@@ -10,6 +10,8 @@ const appBuilder = () =>
     );
     app.use('/towns', require('./routes/towns'));
     app.use('/users', require('./routes/users'));
+    app.use('/locations', require('./routes/locations'));
+    app.use('/towns/:townId/locations', require('./routes/townsLocations'));
     resolve(app);
   });
 
