@@ -1,11 +1,11 @@
 const express = require('express');
-const townsLocations = require('../controllers/townsLocations');
+const comments = require('../controllers/comments');
 const router = new express.Router({ mergeParams: true });
 
 router.get('/', async (req, res) => {
   try {
-    const townList = await townsLocations.index(req);
-    res.json(townList);
+    const commentList = await comments.index(req);
+    res.json(commentList);
   } catch (err) {
     console.error(err);
     res.sendStatus(404);
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const result = await townsLocations.create(req);
+    const result = await comments.create(req);
     res.status(201).json(result);
   } catch (err) {
     console.error(err);
@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const result = await townsLocations.show(req);
+    const result = await comments.show(req);
     res.status(result.status || 200).json(result);
   } catch (err) {
     console.error(err);
@@ -34,7 +34,7 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const result = townsLocations.update(req);
+    const result = comments.update(req);
     res.status(result.status || 200).json(result);
   } catch (err) {
     console.error(err);
@@ -44,7 +44,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const result = townsLocations.destroy(req);
+    const result = comments.destroy(req);
     res.status(result.status || 200).json(result);
   } catch (err) {
     console.error(err);

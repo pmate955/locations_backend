@@ -8,6 +8,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Location.associate = function (models) {
     Location.belongsTo(models.Town, { foreignKey: 'townId' });
+    Location.hasMany(models.Comment, { foreignKey: 'locationId' });
+    Location.hasMany(models.Favorite, { foreignKey: 'locationId' });
   };
   return Location;
 };

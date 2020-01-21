@@ -11,7 +11,8 @@ const appBuilder = () =>
     app.use('/towns', require('./routes/towns'));
     app.use('/users', require('./routes/users'));
     app.use('/locations', require('./routes/locations'));
-    app.use('/towns/:townId/locations', require('./routes/townsLocations'));
+    app.use('/users/:userId/favorites', require('./routes/favorites'));
+    app.use('/locations/:locationId/comments', require('./routes/comments'));
     resolve(app);
   });
 

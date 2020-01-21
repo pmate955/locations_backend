@@ -6,8 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     passwordHash: DataTypes.STRING,
     role: DataTypes.STRING
   }, {});
-  User.associate = function(models) {
-    // associations can be defined here
+  User.associate = function (models) {
+    User.hasMany(models.Favorite, { foreignKey: 'userId' });
+    User.hasMany(models.Comment, { foreignKey: 'userId' });
   };
   return User;
 };
