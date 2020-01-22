@@ -1,3 +1,10 @@
 {
-    "secret": "THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING"
+    "secret": "THIS IS USED TO SIGN AND VERIFY JWT TOKENS, REPLACE IT WITH YOUR OWN SECRET, IT CAN BE ANY STRING",
+    "availableRoutes": [
+        "/sessions/new",
+        "/locations",
+        "/users"
+      ],
+      "expirationTime": "1",
+      "expirationUnit": "d"
 }
