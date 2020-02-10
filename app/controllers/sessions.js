@@ -3,18 +3,17 @@ const jwt = require('jsonwebtoken');
 const models = require('../models');
 const passwordHashNpm = require('password-hash');
 
-module.exports.new = async ({ username, password }) => {
-  const user = models.User.findOne({
+module.exports.new = async (req) => {
+  const user = await models.User.findOne({
     where: {
-      username: username,
-      passwordHash: passwordHashNpm.verify(password)
+      username: req.body.username,
+      passwordHash: passwordHashNpm.verify(req.body.password)
     }
   });
   if (user) {
-    const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: `${config.expirationTime}${config.exporationUnit}` });
+    const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: `${config.expirationTime}${config.expirationUnit}` });
     const { password, ...userWithoutPassword } = user;
     return {
-      ...userWithoutPassword,
       token
     };
   }
