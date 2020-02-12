@@ -12,9 +12,14 @@ module.exports.new = async (req) => {
   });
   if (user) {
     const token = jwt.sign({ sub: user.id }, config.secret, { expiresIn: `${config.expirationTime}${config.expirationUnit}` });
-    const { password, ...userWithoutPassword } = user;
+    const { username, email, role, createdAt, id } = user;
     return {
-      token
+      token,
+      id,
+      username,
+      email,
+      role,
+      createdAt
     };
   }
 };
