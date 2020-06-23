@@ -1,40 +1,17 @@
-'use strict';
-module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Users', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      username: {
-        type: Sequelize.STRING,
-        unique: true
-      },
-      email: {
-        type: Sequelize.STRING,
-        unique: true
-      },
-      passwordHash: {
-        type: Sequelize.STRING
-      },
-      role: {
-        type: Sequelize.STRING
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP()')
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP()')
-      }
-    });
-  },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Users');
-  }
+
+exports.up = function (knex) {
+  return knex.schema.createTable('users', (table) => {
+    table.increments();
+    table.string('username');
+    table.string('email');
+    table.string('passwordHash');
+    table.string('geoLocation');
+    table.enu('role', ['user', 'admin']);
+    table.timestamp('updated_at').defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+    table.timestamp('created_at').defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+  });
+};
+
+exports.down = function (knex) {
+  return knex.schema.dropTable('users');
 };

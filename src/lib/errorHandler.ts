@@ -1,4 +1,4 @@
-module.exports = (err, req, res, next) => {
+export default (err, req, res, next) => {
   if (typeof (err) === 'string') {
     // custom application error
     return res.status(400).json({ message: err });

@@ -1,32 +1,39 @@
 {
   "name": "locations_backend",
-  "version": "1.0.0",
-  "description": "Small app for store locations",
-  "main": "index.js",
-  "scripts": {
-    "dev": "NODE_ENV=development nodemon index.js",
-    "db:migrate": "sequelize db:migrate --config=./config/database.json",
-    "db:migrate:undo": "sequelize db:migrate:undo --config=./config/database.json",
-    "db:rebuild": "./bin/db-rebuild"
-  },
-  "keywords": [
-    "locations",
-    "nodejs"
-  ],
-  "author": "Mate Pinter",
+  "author": "Máté Pintér",
   "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "express-jwt": "^5.3.1",
-    "jsonwebtoken": "^8.5.1",
-    "moment": "^2.24.0",
-    "mysql2": "^2.1.0",
-    "password-hash": "^1.2.2",
-    "sequelize": "^5.21.3",
-    "sequelize-cli": "^5.5.1"
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "webpack",
+    "dev": "concurrently \"webpack -w\" \"nodemon build/bundle.js\"",
+    "start": "node build/bundle.js",
+    "db:migrate": "node ./node_modules/.bin/knex migrate:up --knexfile=config/database.json",
+    "db:rollback": "node ./node_modules/.bin/knex migrate:rollback --knexfile=config/database.json",
+    "db:seed": "node ./node_modules/.bin/knex seed:run --knexfile=config/database.json"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
-  }
+    "@types/express": "^4.17.2",
+    "@types/node": "^12.12.27",
+    "concurrently": "^4.1.2",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "@types/knex": "^0.16.1",
+    "@types/swagger-express-middleware": "^1.0.10",
+    "bcrypt": "^4.0.1",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.20.10",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.2",
+    "swagger-express-middleware": "^2.0.5",
+    "swagger-ui": "^3.25.1",
+    "swagger-ui-express": "^4.1.4",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "main": "src/index.ts"
 }

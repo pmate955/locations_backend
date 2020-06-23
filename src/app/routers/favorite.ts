@@ -1,6 +1,7 @@
-const express = require('express');
-const favorites = require('../controllers/favorites');
-const router = new express.Router({ mergeParams: true });
+import * as favorites from '../controllers/favorites';
+import { Router } from 'express';
+
+export const router: Router = Router({ mergeParams: true });
 
 router.get('/', async (req, res) => {
   try {
@@ -52,4 +53,3 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-module.exports = router;

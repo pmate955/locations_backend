@@ -1,5 +1,6 @@
 database.json
 # Logs
+build/bundle.js
 logs
 *.log
 npm-debug.log*

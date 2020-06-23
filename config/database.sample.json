@@ -1,23 +1,18 @@
 {
-    "development": {
-      "username": "root",
-      "password": null,
-      "database": "locations_development",
-      "host": "127.0.0.1",
-      "dialect": "mysql"
+  "development": {
+    "client": "mysql",
+    "connection": {
+      "host": "locations-db",
+      "user": "root",
+      "password": "toor",
+      "database": "database"
     },
-    "test": {
-      "username": "root",
-      "password": null,
-      "database": "database_test",
-      "host": "127.0.0.1",
-      "dialect": "mysql"
+    "migrations": {
+      "tableName": "migrations",
+      "directory": "../migrations"
     },
-    "production": {
-      "username": "root",
-      "password": null,
-      "database": "locations_production",
-      "host": "127.0.0.1",
-      "dialect": "mysql"
+    "seeds": {
+      "directory": "../seeds"
     }
   }
+}

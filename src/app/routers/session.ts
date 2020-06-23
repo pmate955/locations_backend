@@ -1,6 +1,7 @@
-const express = require('express');
-const sessions = require('../controllers/sessions');
-const router = new express.Router({ mergeParams: true });
+import * as sessions from '../controllers/sessions';
+import { Router } from 'express';
+
+export const router: Router = Router({ mergeParams: true });
 
 router.post('/new', async (req, res) => {
   try {
@@ -22,4 +23,3 @@ router.delete('/destroy', async (req, res) => {
   }
 });
 
-module.exports = router;

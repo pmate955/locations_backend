@@ -1,48 +1,16 @@
-'use strict';
-module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Comments', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      userId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Users',
-          key: 'id'
-        }
-      },
-      locationId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Locations',
-          key: 'id'
-        }
-      },
-      commentMessage: {
-        type: Sequelize.TEXT
-      },
-      rating: {
-        type: Sequelize.INTEGER
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP()')
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP()')
-      }
-    });
-  },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Comments');
-  }
+
+exports.up = function (knex) {
+  return knex.schema.createTable('comments', (table) => {
+    table.increments();
+    table.string('content');
+    table.integer('rating');
+    table.integer('userId').unsigned().references('users.id');
+    table.integer('locationId').unsigned().references('locations.id');
+    table.timestamp('updated_at').defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+    table.timestamp('created_at').defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+  });
+};
+
+exports.down = function (knex) {
+  return knex.schema.dropTable('comments');
 };

@@ -2,7 +2,6 @@ const models = require('../models');
 
 const params = (req) => ({
   locationId: req.body.locationId,
-  locationId: req.body.locationId,
   commentMessage: req.body.commentMessage,
   rating: req.body.rating
 });
