@@ -1,55 +1,55 @@
-import * as favorites from '../controllers/favorites';
-import { Router } from 'express';
+// import * as favorites from '../controllers/favorite';
+// import { Router } from 'express';
 
-export const router: Router = Router({ mergeParams: true });
+// export const router: Router = Router({ mergeParams: true });
 
-router.get('/', async (req, res) => {
-  try {
-    const favoriteList = await favorites.index(req);
-    res.json(favoriteList);
-  } catch (err) {
-    console.error(err);
-    res.sendStatus(404);
-  }
-});
+// router.get('/', async (req, res) => {
+//   try {
+//     const favoriteList = await favorites.index(req);
+//     res.json(favoriteList);
+//   } catch (err) {
+//     console.error(err);
+//     res.sendStatus(404);
+//   }
+// });
 
-router.post('/', async (req, res) => {
-  try {
-    const result = await favorites.create(req);
-    res.status(201).json(result);
-  } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
-  }
-});
+// router.post('/', async (req, res) => {
+//   try {
+//     const result = await favorites.create(req);
+//     res.status(201).json(result);
+//   } catch (err) {
+//     console.error(err);
+//     res.sendStatus(500);
+//   }
+// });
 
-router.get('/:id', async (req, res) => {
-  try {
-    const result = await favorites.show(req);
-    res.status(result.status || 200).json(result);
-  } catch (err) {
-    console.error(err);
-    res.sendStatus(404);
-  }
-});
+// router.get('/:id', async (req, res) => {
+//   try {
+//     const result = await favorites.show(req);
+//     res.status(result.status || 200).json(result);
+//   } catch (err) {
+//     console.error(err);
+//     res.sendStatus(404);
+//   }
+// });
 
-router.put('/:id', async (req, res) => {
-  try {
-    const result = favorites.update(req);
-    res.status(result.status || 200).json(result);
-  } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
-  }
-});
+// router.put('/:id', async (req, res) => {
+//   try {
+//     const result = favorites.update(req);
+//     res.status(result.status || 200).json(result);
+//   } catch (err) {
+//     console.error(err);
+//     res.sendStatus(500);
+//   }
+// });
 
-router.delete('/:id', async (req, res) => {
-  try {
-    const result = favorites.destroy(req);
-    res.status(result.status || 200).json(result);
-  } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
-  }
-});
+// router.delete('/:id', async (req, res) => {
+//   try {
+//     const result = favorites.destroy(req);
+//     res.status(result.status || 200).json(result);
+//   } catch (err) {
+//     console.error(err);
+//     res.sendStatus(500);
+//   }
+// });
 
