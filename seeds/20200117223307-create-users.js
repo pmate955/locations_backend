@@ -3,19 +3,19 @@ exports.seed = (knex) => {
     {
       username: 'testUser1',
       email: 'test@email.com',
-      passwordHash: 'sha1$0458635c$1$b05a3a5d82c6f899817adb2e4b860756d61fe34d', // teszt
+      passwordHash: '$2b$10$UWA0Wle.Aw5MxH.hdScEguzn.ceJXHY2QSpyLF66ZSGXIGn.qsT8G', // asd123
       role: 'user'
     },
     {
       username: 'testUser2',
       email: 'test2@email.com',
-      passwordHash: 'sha1$0458635c$1$b05a3a5d82c6f899817adb2e4b860756d61fe34d',
+      passwordHash: '$2b$10$UWA0Wle.Aw5MxH.hdScEguzn.ceJXHY2QSpyLF66ZSGXIGn.qsT8G',
       role: 'user'
     },
     {
       username: 'testAdmin1',
       email: 'test3@email.com',
-      passwordHash: 'sha1$0458635c$1$b05a3a5d82c6f899817adb2e4b860756d61fe34d',
+      passwordHash: '$2b$10$UWA0Wle.Aw5MxH.hdScEguzn.ceJXHY2QSpyLF66ZSGXIGn.qsT8G',
       role: 'admin'
     }
   ]);
