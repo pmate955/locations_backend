@@ -21,7 +21,7 @@ const anonymusEndpoints: Array<AnonymusEndpoint> = [
     method: Method.post
   },
   {
-    path: '/user',
+    path: '/users',
     method: Method.post
   }
 ]

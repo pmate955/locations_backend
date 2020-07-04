@@ -4,6 +4,7 @@ import { database } from "../../lib/database";
 import { Request, Response } from "express";
 import * as bcrypt from 'bcrypt';
 import { QueryBuilder } from "knex";
+import * as userSerializer from '../serializers/user';
 
 export const index = async (req: Request, res: Response) => {
   let query: QueryBuilder = database('users').select();
@@ -14,15 +15,27 @@ export const index = async (req: Request, res: Response) => {
     query = query.offset(parseInt(req.query.offset as string));
   }
   const users: Array<User> = await query;
-  res.json(users);
+  res.json(userSerializer.index(users));
 };
 
 export const show = async (req: Request, res: Response) => {
   try {
     const user: User = await database('users').select().where({ id: req.params.id }).first();
-    console.log(user);
     if (typeof user !== 'undefined') {
-      res.json(user);
+      res.json(userSerializer.show(user));
+    } else {
+      res.sendStatus(404);
+    }
+  } catch(error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+};
+
+export const me = async (req: Request, res: Response) => {
+  try {
+    if (typeof res.locals.user !== 'undefined') {
+      res.json(res.locals.user);
     } else {
       res.sendStatus(404);
     }
@@ -43,7 +56,7 @@ export const create = async (req: Request, res: Response) => {
       geoLocation: req.body.geoLocation
     }
     await database('users').insert(user);
-    res.sendStatus(201);
+    res.status(201).send({created: 'ok'});
   } catch(error) {
     console.error(error);
     res.sendStatus(500);
