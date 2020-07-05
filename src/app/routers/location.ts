@@ -4,6 +4,7 @@ import { Router } from 'express';
 export const router: Router = Router({ mergeParams: true });
 
 router.get('/', locationController.index);
+router.get('/my', locationController.userLocations);
 router.get('/:id', locationController.show);
 router.post('/', locationController.create);
 router.put('/:id', locationController.update);

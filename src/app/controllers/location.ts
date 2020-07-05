@@ -23,6 +23,18 @@ export const index = async (req: Request, res: Response) => {
   res.json(locations);
 };
 
+export const userLocations = async (req: Request, res: Response) => {
+  let query: QueryBuilder = database('locations').select().where({ creatorUserId: res.locals.user.id });
+  if (req.query.limit) {
+    query = query.limit(parseInt(req.query.limit as string));
+  }
+  if (req.query.offset) {
+    query = query.offset(parseInt(req.query.offset as string));
+  }
+  const locations: Array<Location> = await query;
+  res.json(locations);
+};
+
 export const show = async (req: Request, res: Response) => {
   try {
     const location: Location = await database('locations').select().where({ id: req.params.id }).first();
