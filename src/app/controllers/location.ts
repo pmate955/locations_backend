@@ -37,7 +37,7 @@ export const userLocations = async (req: Request, res: Response) => {
 
 export const show = async (req: Request, res: Response) => {
   try {
-    const location: Location = await database('locations').select().where({ id: req.params.id }).first();
+    const location: Location = await database('locations').join('users', 'locations.creatorUserId', '=', 'users.id').select(['locations.id', 'locations.name', 'locations.description', 'locations.geoLocation','locations.creatorUserId', 'users.username', 'locations.created_at']).where({ 'locations.id': req.params.id }).first();
     if (typeof location !== 'undefined') {
       res.json(location);
     } else {
