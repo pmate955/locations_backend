@@ -79,9 +79,30 @@ export const update = async (req: Request, res: Response) => {
     }
   } catch(error) {
     console.error(error);
-    res.sendStatus(500);
+    res.sendStatus(400);
   }
 };
+
+export const updateMe = async (req: Request, res: Response) => {
+  try {
+    const user: User = await database('users').select().where({ id: res.locals.user.id }).first();
+    if (user) {
+      const newUser: Partial<User> = {
+        username: req.body.username,
+        email: req.body.email,
+        geoLocation: req.body.geoLocation
+      }
+      await database('users').update(newUser).where({ id: res.locals.user.id });
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(404);
+    }
+  } catch(error) {
+    console.error(error);
+    res.sendStatus(400);
+  }
+};
+
 
 export const destroy = async (req: Request, res: Response) => {
   try {
@@ -90,6 +111,20 @@ export const destroy = async (req: Request, res: Response) => {
       await database('users').delete().where({ id: req.params.id });
       res.sendStatus(204);
     } else {
+      res.sendStatus(404);
+    }
+  } catch(error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+}
+export const destroyMe = async (req: Request, res: Response) => {
+  try {
+    if (res.locals.user &&  bcrypt.compareSync(req.body.password, res.locals.user.passwordHash)) {
+      await database('users').delete().where({ id: res.locals.user.id });
+      res.sendStatus(204);
+    } else {
+      console.log(bcrypt.compareSync(req.body.password, res.locals.user.passwordHash))
       res.sendStatus(404);
     }
   } catch(error) {
