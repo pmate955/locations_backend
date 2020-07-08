@@ -2,6 +2,8 @@ import Location from "../models/location";
 import { database } from "../../lib/database";
 import { Request, Response, NextFunction } from "express";
 import { QueryBuilder } from "knex";
+import * as locationSerializer from '../serializers/location';
+import User from "../models/user";
 
 export const authorization = (req: Request, res: Response, next: NextFunction) => {
   if(['admin'].includes(res.locals.user.role)) {
@@ -37,9 +39,11 @@ export const userLocations = async (req: Request, res: Response) => {
 
 export const show = async (req: Request, res: Response) => {
   try {
-    const location: Location = await database('locations').join('users', 'locations.creatorUserId', '=', 'users.id').select(['locations.id', 'locations.name', 'locations.description', 'locations.geoLocation','locations.creatorUserId', 'users.username', 'locations.created_at']).where({ 'locations.id': req.params.id }).first();
+    const location: Location = await database('locations').select().where({ 'locations.id': req.params.id }).first();
     if (typeof location !== 'undefined') {
-      res.json(location);
+      const creator: User = await database('users').select().where({id: location.creatorUserId}).first();
+      const comments: Array<any> = await database('comments').select(['comments.rating', 'comments.content', 'comments.created_at', 'users.username']).join('users', 'comments.userId', '=', 'users.id').where({ 'comments.locationId': req.params.id });
+      res.json(locationSerializer.show(location, creator, comments));
     } else {
       res.sendStatus(404);
     }

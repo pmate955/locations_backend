@@ -58,8 +58,13 @@ export const create = async (req: Request, res: Response) => {
     await database('users').insert(user);
     res.status(201).send({created: 'ok'});
   } catch(error) {
-    console.error(error);
-    res.sendStatus(500);
+    if(error.sqlMessage.includes('users_username_unique')) {
+      res.status(400).send({ message: 'username in use'});
+    } else if(error.sqlMessage.includes('users_email_unique')){
+      res.status(400).send({ message: 'email in use'});
+    } else {
+      res.sendStatus(500);
+    }
   }
 };
 
