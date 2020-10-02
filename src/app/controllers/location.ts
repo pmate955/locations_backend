@@ -61,7 +61,8 @@ export const create = async (req: Request, res: Response) => {
       geoLocation: req.body.geoLocation,
       creatorUserId: res.locals.user.id
     }
-    await database('locations').insert(location);
+    const data = await database('locations').insert(location);
+    console.log('CREATED', data, data[0], typeof data)
     res.sendStatus(201);
   } catch(error) {
     console.error(error);
@@ -78,7 +79,8 @@ export const update = async (req: Request, res: Response) => {
         description: req.body.description,
         geoLocation: req.body.geoLocation,
       }
-      await database('locations').update(newLocation).where({ id: req.params.id });
+      const data = await database('locations').update(newLocation).where({ id: req.params.id });
+      console.log(data);
       res.sendStatus(200);
     } else {
       res.sendStatus(404);

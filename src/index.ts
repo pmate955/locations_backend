@@ -15,7 +15,16 @@ const socket = require('socket.io')(http, {serveClient: false});
 
 socket.on('connection', (socket) => {
   console.log('Connected')
-} )
+});
+
+socket.on('new-message', (message) => {
+  console.log('MESSAGE', message)
+  socket.emit(message);
+});
+
+socket.on('error', function (err) {
+  console.log(err);
+});
 
 http.listen(PORT, () => {
   console.log(`server started at http://localhost:${PORT}`);
