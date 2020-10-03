@@ -1,11 +1,11 @@
 import * as jwt from "jsonwebtoken";
 import User from "../app/models/user";
 import { database } from "./database";
+import { createBroadcastMessage } from "../app/controllers/message";
 
 export const initSocket = (http) => {
 
   const io = require('socket.io')(http, {serveClient: false});
-  const messages = [];
   
   io.use(async (socket, next) => {
     try {
@@ -25,13 +25,8 @@ export const initSocket = (http) => {
     
     socket.join('common room');
 
-    socket.on('new-message', (message) => {
-      const dbMessage = {
-        creatorId: socket.decodedUser.id,
-        creatorName: socket.decodedUser.username,
-        body: message.body
-      }
-      messages.push(dbMessage);
+    socket.on('new-message', async (message) => {
+      const dbMessage = await createBroadcastMessage(message.body, socket.decodedUser);
       io.in('common room').emit('new-message', dbMessage);
     });
     
